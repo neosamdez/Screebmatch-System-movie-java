@@ -3,7 +3,7 @@ package br.com.neo.screenmatch.models;
 public class Title {
     private String name;
     private int releaseYear; // ano de lançamento
-    private boolean incluidedOnPlan; // incluido no plano  
+    private boolean includedOnPlan; // incluido no plano  
     private double sumEvaluation; // soma das avaliações
     private int totalReviews; // total de avaliações
     private int durationInMinutes; // duraçao em minutos
@@ -26,9 +26,14 @@ public class Title {
     public void setReleaseYear(int releaseYear) {
         this.releaseYear = releaseYear;
     }
-    
-    public void setInclidedOnPlan(boolean incluidedOnPlan) {
-        this.incluidedOnPlan = incluidedOnPlan;
+
+    public void setIncludedOnPlan(boolean includedOnPlan) {
+        this.includedOnPlan = includedOnPlan;
+    }
+
+
+    public boolean isIncludedOnPlan() {
+        return includedOnPlan;
     }
     
     public void setDurationInMinutes(int durationInMinutes) {
@@ -39,8 +44,9 @@ public class Title {
     public void onDisplay(){
         System.out.println("Nome do filme: " + name);
         System.out.println("Ano de lançamento do Filme: " + releaseYear);
-        System.out.println("Duração do Filme: " + durationInMinutes);
-        System.out.println("Incluido no plano? " + incluidedOnPlan);
+        System.out.println("Duração do Filme: " + durationInMinutes + " min");
+        // Usar o campo padronizado
+        System.out.println("Incluido no plano? " + includedOnPlan);
     }
 
     // guarda as notas e soma
@@ -51,6 +57,10 @@ public class Title {
 
     //divide a soma das avaliaçoes pelo numero de avaliações
     public double medEvaluation(){
+        // Proteção contra divisão por zero: se não houve avaliações, retorna 0.
+        if (totalReviews == 0) {
+            return 0.0;
+        }
         return sumEvaluation / totalReviews;
 
     }

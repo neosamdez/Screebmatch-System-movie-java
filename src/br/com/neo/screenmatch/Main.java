@@ -1,6 +1,10 @@
 package br.com.neo.screenmatch;
+import br.com.neo.screenmatch.calc.CalcTime;
+import br.com.neo.screenmatch.calc.FilterRecomend;
+import br.com.neo.screenmatch.models.Episode;
 import br.com.neo.screenmatch.models.Movie;
 import br.com.neo.screenmatch.models.Serie;
+
 
 public class Main {
     public static void main(String[] args) {
@@ -21,13 +25,26 @@ public class Main {
         Serie twd = new Serie();
         twd.setName("the walking dead");
         twd.setReleaseYear(2015);
-        twd.setInclidedOnPlan(false);
-        twd.setSeasons(10);
+        twd.setIncludedOnPlan(false);
+        twd.setSeasons(12);
         twd.setEpSeason(16);
         twd.setMinEpisode(50);
 
         System.out.println("Duração para maratonar Twd: " + twd.getDurationInMinutes());
         
+        CalcTime calculator = new CalcTime();
+        System.out.println("Tempo total calculado (min): " + calculator.getTotalTime());
+
+        FilterRecomend filter = new FilterRecomend();
+        filter.filter(myMovie);
+
+        Episode episode =  new Episode();
+        episode.setNumber(1);
+        episode.setSerie(twd);
+        episode.setTitle("Pilot");
+        episode.setDurationInMinutes(50);
+        episode.setSeason(1);
+        episode.setTotalViews(4000);
 
     }
 
